@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<style>
+input {
+  display: block;
+}
+
+.Package-Label {
+  display:grid;
+    grid-template-columns: 40%;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 20px 20px 20px rgba(0,0,0,0.05);
+    background: white;  
+  }
+
+
+
+	</style>
+    </head>
+    <body>
+      
+      
+        <div class="Package-Label">
+        <div>
+
+          <h3>Owner information</h3>
+          <label for="owner-name">Name
+          <input id="owner-name" placeholder="Kim Taehyung">
+          </label>
+        </div>
+        <div>
+          <h3>Package Details</h3>
+          <input id="package-number">
+          <input id="tracking-number" placeholder="001265">
+          <input id="weight" placeholder="1 lb">
+	  <input id="description" placeholder="Apparel">
+        </div>
+          <button class="generate-pdf">Generate label</button>
+        </div>
+        <script async defer>
+		$(document).ready(function() {
+  });
+
+$(".generate-pdf").on("click", function() {
+  var printWindow = window.open('', '', 'height=600','width=800');
+  printWindow.document.write('<html><head><title>');
+  printWindow.document.write($("#tracking-number").val());
+  printWindow.document.write('</title>');
+  printWindow.document.write('<style>* { font-family: arial } p { margin:5px 0; }h6{display:inline; text-transform:uppercase}</style><style media="print">@page { size: auto;margin: 0; } </style>');  
+  printWindow.document.write('</head><body style="display: flex;flex-direction: column;height: 100%;box-sizing: border-box;padding:40px">');
+  var packageDetails = combinePackageDetails();
+  var ownerInfo = combineOwnerInfo();
+  printWindow.document.write('<div style="display:flex;justify-content:space-between">');
+  printWindow.document.write("ShipInEaz Jamaica 8766758645");
+  printWindow.document.write(packageDetails);
+  printWindow.document.write('</div>');
+  printWindow.document.write(ownerInfo);
+  printWindow.document.write('</body></3html>');
+  printWindow.document.close();
+  printWindow.print();
+
+  var name0 = $("#owner-name").val();
+  var tracking0 = $("#tracking-number").val();
+  var weight0 = $("#weight").val();
+  var description0 = $("#description").val();
+
+    
+
+});
+
+
+
+function combineOwnerInfo(){
+  var from = "<div style='max-width:500px;margin:0 auto;'><h3>To: "
+  var name = $("#owner-name").val() + "</h3>";
+
+  return from + name;
+}
+
+function combinePackageDetails(){
+  var container = "<div style='text-align:right'>";
+  var tracking = "<br><br><br><br><br><br><h6>TRACKING #: " + $("#tracking-number").val() + "</h6><br>";
+  var package_number = "<h6>PACKAGE #: " + $("#package-number").val() + "</h6><br>"
+  var weight = "<h6>WEIGHT: " + $("#weight").val() + "</h6><br>";
+  var description = "<h6>DESCRIPTION: " + $("#description").val() + "</h6>"
+  return container + tracking + package_number + weight + description;
+}
+
+
+	</script>
+    </body>
+</html>
