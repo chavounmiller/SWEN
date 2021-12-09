@@ -19,8 +19,6 @@ command_handler = db.cursor()
 def logpackage():
     name = input("Name: ")
     trackingnumber = input("Tracking Number: ")
-    if trackingnumber = NULL:
-        print("Must enter a Tracking Number")
     weight = input("Weight: ")
     description = input("Description: ")
     sql = "INSERT INTO ship1 (Name, TrackingNumber, Weight, Description) VALUES (%s, %s, %s, %s)"
