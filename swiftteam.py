@@ -3,7 +3,7 @@ import mysql.connector as mysql
 #variables
 host = "swiftdb-cluster.cluster-cj9xsjwre8ky.us-east-2.rds.amazonaws.com"
 user = "admin"
-password = "Mynameisdk123"
+password = ""
 
 #connect to mysql
 try:
